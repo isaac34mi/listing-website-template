@@ -29,7 +29,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['www.yourunilist.com']
 
 EMAIL_HOST ="smtp.gmail.com"
-EMAIL_HOST_USER ='stateshopinfo@gmail.com'
+EMAIL_HOST_USER = os.environ['EMAIL_ADDRESS']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 EMAIL_PORT = 587
 EMAIL_USE_TLS =True
