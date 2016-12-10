@@ -4,19 +4,6 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
-# Create your models here.
-# class UserProfile(models.Model):
-# 	#this line is required . links UserProfile to user Model instance.
-# 	user = models.OneToOneField(User)
-
-# 	#The additional attributes we wish to include
-# 	picture = models.ImageField(upload_to = 'profile_images', blank = True)
-
-# 	#override trhe __unicode__() method to return out something meaningful
-
-# 	def __unicode__(self):
-# 		return self.user.username
-
 class Category(models.Model):
  	name = models.CharField(max_length=128, unique = True)
  	views = models.IntegerField(default = 0)
