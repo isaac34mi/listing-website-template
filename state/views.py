@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.contrib.auth.models import User
-from django.forms import modelformset_factory
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.forms import modelformset_factory
+from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from state.forms import CategoryForm,ProductForm,ImageForm
 from state.models import Category, Products, Images
@@ -34,14 +35,11 @@ def add_category(request):
 	if request.method =="POST":
 		form = CategoryForm(request.POST)
 		if form.is_valid():
-			#save the new categroy to the database.
+			#save the new categroy
 			form.save(commit =True)
-
- 		#now call the index() view.
-            # The user will be shown the homepage.
 			return index(request)
 		else:
-		    print (form.errors)
+		    print(form.errors)
 	else:
 		form =CategoryForm()
 
@@ -75,9 +73,8 @@ def add_product(request, category_name_slug,pk):
 				num= Products.objects.values_list('code', flat=True).order_by('-code')
 
 				num = num[0]
-				print(num)
 				for frm in formset.cleaned_data:
-				    #want to use pillow to reduce the size of image before it is saved.
+				    #will leter use pillow to reduce the size of image before it is saved.
 				    image = frm.get('image')
 				    photo = Images(post=num,user=user,image=image)
 				    photo.save()
@@ -116,7 +113,6 @@ def email_success(request):
 	context_dict = {'categories':category_list}
 	return render (request,'state/email_success.html',context_dict)
 
-
 def delete_product_success(request):
 	category_list = Category.objects.order_by('-likes')
 	context_dict = {'categories':category_list}
@@ -146,7 +142,7 @@ def contact(request):
 		email = request.POST.get("email")
 		comment = request.POST.get("comment")
 		Subject = "State-Shop"
-		message = "Name: %s \n Email: %s \n message \n %s" %(full_name,email,comment)
+		message = "Name: {} \n Email: {} \n message \n {}".format(full_name,email,comment)
 		from_email = settings.EMAIL_HOST_USER
 		to_email =['stateshopinfo@gmail.com']
 
