@@ -1,0 +1,8 @@
+{% extends "state/base.html" %}
+{%block body_block%}
+<div class="container">
+<h4> Item has been deleted sucessfully.</h4>
+<p class="lead"> This means that the item will be removed from public view.</p>
+<a href="{% url 'index'%}"><button class="w3-btn w3-blue">Return Home</button></a>
+</div>
+{%endblock%}

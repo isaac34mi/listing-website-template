@@ -1,0 +1,28 @@
+{% extends 'state/base.html' %}
+{% load staticfiles %}
+{% block title%}YourUniList | College Student Buy & Sell Textbooks, Electronics, Furniture, & More{%endblock %}
+
+{% block body_block %}
+<div>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-body">Need some cash for your old books, electronics, furniture or even sub-lease an apartment? list them here. Or if you can find items posted by others</div>
+        </div>
+    </div>
+
+ </div><br/>
+
+	{% if user.is_authenticated %}
+			<h2>hello {{ user.username }}!</h2><br/>
+			{%include 'state/all_products.html' %}
+	{% else %}
+		{%include 'state/all_products.html'%}
+			{%endif%}
+
+
+	{% if not categories %}
+	 	<strong>There are no categries present</strong>
+	 {%endif%}
+</div>
+
+{%endblock%}

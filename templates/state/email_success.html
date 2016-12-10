@@ -1,0 +1,24 @@
+{% extends "state/base.html" %}
+{% load staticfiles %}
+{% block title%} Email Sent{%endblock %}
+{% block body_block %}
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<div class="w3-container">
+		<div class="w3-card-4" style="width:50%;">
+		<header class="w3-container w3-blue w3-center"> Email Sent </header>
+		<div class ="w3-container">
+			<h3> Email has been sent successful.</h3>
+			<h3> Use the home button to return</h3>
+			<h3>to homepage</h3><br/>
+			<h4> Thanks :)</h4><br/>
+			<p class='w3-center'><a href="{% url 'index' %}"><button class="w3-btn w3-amber">Home</button></a></p></div>
+	</div>
+	</div>
+	</div>
+<div class="col-md-4"></div>
+</div>
+
+
+{%endblock%}

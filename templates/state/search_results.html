@@ -1,0 +1,33 @@
+{% extends "state/base.html" %}
+{% load staticfiles %}
+{% block title%} Search Results {%endblock %}
+{% block body_block %}
+ <p> Search Results for <strong>{{query}}</strong></p>
+ {% if results %}
+ 	<p>Found {{results|length}} Item{{ results|pluralize}}.</p>
+ 	<div class="w3-row">
+
+				{% for result in results %}
+			<form method = "POST" action="/state/product_detail_view/{{result.code}}/">
+				{% csrf_token %}
+				<div class="w3-col s3  w3-center">
+				<button class="btn btn-default" type="submit"><h3>{{ result.title|truncatechars:27}}</h3><hr/>
+				{% if result.coverImage %}
+				      <img class='crop' src='{{ result.coverImage.url }}' />
+						{%else%}
+				       		<img class='crop' src="{%static 'images/no-thumb.jpg' %}" />
+						{%endif%}
+				       <p></p><p><strong>Price $ {{result.product_price}}</strong></p>
+				        <p>{{result.description|truncatechars:31}}</p>
+				        </button>
+				 </div>
+				 </form>
+
+				  {%endfor%}
+	</div>
+	{% else %}
+		<p>No Items matched your search criteria.</p>
+		<div class="container" style="margin-bottom:400px;"></div>
+	{%endif%}
+
+{%endblock%}

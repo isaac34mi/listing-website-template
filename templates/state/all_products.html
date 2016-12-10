@@ -1,0 +1,29 @@
+{% load staticfiles %}
+{% load humanize %}
+{% if products %}
+<div class="container-fluid">
+<div class="row">
+
+	{% for product in products %}
+	<form method = "POST" action="/state/product_detail_view/{{product.code}}/">
+		{% csrf_token %}
+		<div class="col-sm-3">
+		        <p>
+		 	<button class="btn btn-default" type="submit"><h3>{{ product.title|truncatechars:22}}</h3><hr/>
+				{% if product.coverImage %}
+					<img class='crop' src='{{ product.coverImage.url }}' />
+				{%else%}
+		       		<img class='crop' src="{%static 'images/no-thumb.jpg' %}" />
+				{%endif%}
+		      	<p></p><p><strong>Price ${{product.product_price}}</strong></p>
+		        <p>{{product.description|truncatechars:31}}</p>
+		        <p class="muted">Created: {{ product.date_created|timesince}} ago</p>
+		    </button>
+		    </p>
+    </div>
+	</form>
+	  {%endfor%}
+
+</div>
+</div><br/>
+{%endif%}

@@ -1,0 +1,35 @@
+{% extends 'state/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title%}Registration{%endblock %}
+{% block body_block %}
+<div class="container">
+<h2> Register  </h2>
+{% if registered %}
+    state says: <strong>thank you for registering!</strong>
+    <a href="{% url 'index' %}">Return to the homepage.</a><br />
+
+{% else %}
+<div class="row">
+<div class="col-md-4">
+<form role="from" id="user_form" method="post" action="/state/register/"
+        enctype="multipart/form-data">
+        {% csrf_token %}
+
+<!-- Display each form -->
+<div class="form-group">
+    {{ user_form|crispy }}
+</div>
+<div class="form-group">
+    {{ profile_form|crispy}}
+</div>
+
+<!-- Provide a button to click to submit the form. -->
+    <input type="submit" class="btn btn-primary" name="submit" value="Register" /> 
+    <a href = "{% url 'login' %}"> or Log in</a><br/>
+</form>
+{% endif %}
+</div>
+</div>
+</div>
+{% endblock %}

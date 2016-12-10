@@ -1,0 +1,28 @@
+{% extends "state/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title%}Yourunilists | Log In{%endblock %}
+
+
+{% block body_block %}
+
+<div class='row'>
+<div class="col-sm-4"></div>
+<div class='col-sm-4 '>
+<h1>Login</h1>
+<form method="post" action=".">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  <input class='btn btn-primary' type="submit" value="{% trans 'Login' %}" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</form>
+<br/><p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+<p style="margin-bottom: 70px;"><a href="{% url 'auth_password_reset' %}">{% trans "Forgot Password ?" %}</a></p>
+</div>
+
+</div>
+<hr/>
+
+
+{% endblock %}

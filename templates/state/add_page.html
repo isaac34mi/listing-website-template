@@ -1,0 +1,32 @@
+{% extends 'state/base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title%} Add Product {%endblock %}
+{% block body_block %}
+<div class="container">
+
+<div class="row">
+<div class="col-sm-3"></div>
+<div class ="col-sm-6">
+<h1>Add a new Product</h1>
+
+        <form id="category_form" method="POST" action="/state/category/{{category.slug}}/{{user.pk}}/add_product/" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {{form|crispy}}
+
+            {{ formset.management_form }}
+            {% for form in formset %}
+                 {{ form }}
+            {% endfor %}
+            <br/><input type="submit" class= "btn btn-primary" name="submit" value="Add Product" />
+        </form>
+    </div>
+  </div>
+  </div>
+ {% endblock %}
+

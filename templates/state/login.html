@@ -1,0 +1,27 @@
+{% extends 'state/base.html' %}
+{% load staticfiles %}
+{% block title%}Log In{%endblock %}
+{% block body_block %}
+
+<div class="container" style="margin-bottom:150px;">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-4">
+		<form  class="form" role="form" method="post" action=".">
+			{% csrf_token %}
+			<div class="form-group">
+				<h2 class="form-signin-heading">Please sign in</h2>
+				<label for ="usr"> Username </label>
+				<input class="form-control" placeholder="Username" id="" maxlength="254" name="username" type="text" required autofocus=""/>
+			</div>
+			<div class="form-group">
+				<label for ="pwd">Password</label>
+				<input type="password" class="form-control" id="id_password" name="password"  required />
+			</div>
+			<div class="form-group">
+       			<button class="btn btn-primary btn-block" type="submit" value="Submit" >Sign in</button>
+       			<br/><a href = "{% url 'register' %}"> or Sing Up</a><br/>
+       		</div>
+        </form>
+        </div>
+    </div>
+{% endblock %}

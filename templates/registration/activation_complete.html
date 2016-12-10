@@ -1,0 +1,11 @@
+{% extends "state/base.html" %}
+{% load i18n %}
+
+{% block body_block %}
+<div class="well well-lg">
+<p class='lead'>{% trans "Your account is now activated." %}</p>
+<article class ="mute">{% trans " To go to your profile, use the profile Tab at the right top coner of the page."%}</article>
+<p class="mute"> Or use the home button to go to Homepage</p>
+</div>
+<p style="margin-bottom:210px;"><a href="{% url 'index' %}"><button>Return Home</button></a></p>
+{% endblock %}

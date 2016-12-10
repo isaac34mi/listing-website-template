@@ -1,0 +1,89 @@
+{% extends "state/base.html" %}
+{% load staticfiles %}
+
+{% block title %}{{object.title}} | details{%endblock%}
+
+{% block body_block %}
+
+<div class='row'>
+	<div class='col-sm-8'>
+		<div class="w3-container">
+		<div><h2>{{ object.title }}</h2></div>
+		{% if pics %}
+		<div class="container-default">
+			{%for i in pics %}
+			{%if i.image%}
+			    <img class="mySlides" id='img' class='img-responsive' src='{{ i.image.url}}' style="height: 500px;width: 560px;"/>
+			{%endif%}
+			{%endfor%}
+			  <div class="w3-section">
+			    <button class="w3-btn w3-dark-grey" onclick="plusDivs(-1)">❮ Prev</button>
+			    <button class="w3-btn" onclick="plusDivs(1)">Next ❯</button>
+			  </div>
+			  {%for i in pics %}
+			{%if not i.image%}
+			<p class="mute"> No other images could be found</p>
+			{%endif%}
+
+			{%endfor%}
+
+
+
+			</div>
+
+			<script>
+			var slideIndex = 1;
+			showDivs(slideIndex);
+
+			function plusDivs(n) {
+			  showDivs(slideIndex += n);
+			}
+
+			function currentDiv(n) {
+			  showDivs(slideIndex = n);
+			}
+
+			function showDivs(n) {
+			  var i;
+			  var x = document.getElementsByClassName("mySlides");
+			  var dots = document.getElementsByClassName("demo");
+			  if (n > x.length) {slideIndex = 1}
+			  if (n < 1) {slideIndex = x.length}
+			  for (i = 0; i < x.length; i++) {
+			     x[i].style.display = "none";
+			  }
+			  for (i = 0; i < dots.length; i++) {
+			     dots[i].className = dots[i].className.replace(" w3-red", "");
+			  }
+			  x[slideIndex-1].style.display = "block";
+
+			}
+			</script>
+			{%else%}
+			<img class='crop' src="{%static 'images/no-thumb.jpg' %}" />
+		{% endif %}
+		<div>
+		<p class='lead'>
+		{{ object.description }}
+		</p>
+		<p><strong>Price ${{object.product_price}}</strong></p>
+		<p class="muted">Created: {{ object.date_created}}</p>
+		</div>
+		</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="w3-card-12 w3-hover-shadow" style="width:70%;">
+				<header class="w3-container w3-blue"><h3>Contact Info</h3></header>
+				<div class="w3-container">
+					<h4><i class="glyphicon glyphicon-user"></i> Name: {% if object.Contact_Name%} {{object.contact_Name}}{%else%}  Not provided{%endif%}</h4>
+					<h4><i class="glyphicon glyphicon-envelope"></i> Email:<a href="mailto:{{number}}" target="_top">{% if object.product_email%}{{object.product_email}}</a>{%else%}  Not provided{%endif%}</h4>
+					<h4><i class="glyphicon glyphicon-earphone"></i> Number:<a href="tel:{{number}}" target="_top">{% if object.contact_number%}{{object.contact_number}}</a>{%else%} Not provided{%endif%}</h4>
+					<h4><i class="glyphicon glyphicon-home"></i> Location: {{object.product_location}}</h4>
+					<h4><i class="fa fa-facebook-official" aria-hidden="true"></i><a href="{{object.product_Fb_url}}">{% if object.product_Fb_url%}{{object.product_Fb_url}}</a>{%else%}  Not provided{%endif%}</h4>
+				</div>
+			</div>
+	</div>
+</div>
+
+
+{%endblock%}
